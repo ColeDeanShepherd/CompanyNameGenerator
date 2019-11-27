@@ -14,5 +14,19 @@ namespace CompanyNameGenerator
                 throw new Exception("Failed precondition.");
             }
         }
+        public static void Invariant(bool condition)
+        {
+            if (!condition)
+            {
+                throw new Exception("Failed invariant.");
+            }
+        }
+        public static void Postcondition(bool condition)
+        {
+            if (!condition)
+            {
+                throw new Exception("Failed postcondition.");
+            }
+        }
     }
 }
