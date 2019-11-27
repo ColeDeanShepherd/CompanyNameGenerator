@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace CompanyNameGenerator
 {
@@ -40,7 +39,7 @@ namespace CompanyNameGenerator
             }
         }
 
-        public static List<string> GenerateNames(Input input, int nameCount, int maxLength)
+        public static List<string> GenerateNames(Input input, int nameCount, int minLength, int maxLength)
         {
             // NOTE: this could result in infinite loops
             var names = new List<string>();
@@ -48,7 +47,7 @@ namespace CompanyNameGenerator
             while (names.Count < nameCount)
             {
                 var possibleName = GenerateName(input);
-                if (possibleName.Length < maxLength)
+                if ((possibleName.Length >= minLength) && (possibleName.Length <= maxLength))
                 {
                     names.Add(possibleName);
                 }
