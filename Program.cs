@@ -16,9 +16,9 @@ namespace CompanyNameGenerator
             "https://raw.githubusercontent.com/first20hours/google-10000-english/master/google-10000-english.txt"
         };
 
-        public const int NameCount = 1000;
         public const int MinLength = 5;
         public const int MaxLength = 10;
+        public const int NameCount = 1;
 
         public static async Task Main(string[] args)
         {
@@ -29,11 +29,13 @@ namespace CompanyNameGenerator
             var words = texts
                 .SelectMany(t => Utils.GetWords(t))
                 .ToList();
-            var generatorInput = new PortmanteauCompanyNameGenerator.Input(words, new Random());
+            var generatorInput = new TwoWordNameGenerator.Input(words, new Random());
+            generatorInput.OptionalWordToInclude = "data";
+            generatorInput.OptionalWordPosition = TwoWordNameGenerator.OptionalWordPosition.Start;
 
             while (true)
             {
-                var companyNames = PortmanteauCompanyNameGenerator.GenerateNames(generatorInput, nameCount: 1, MinLength, MaxLength);
+                var companyNames = TwoWordNameGenerator.GenerateNames(generatorInput, NameCount, MinLength, MaxLength);
                 foreach (var companyName in companyNames)
                 {
                     Console.WriteLine(companyName);
